@@ -13,6 +13,15 @@
 使用 `touch_pad_button.c.h` 驱动模块，来对ESP32的 `触摸传感器` 进行配置。
 
 
+## 硬件连接
+
+|        | LED    | Touch_Pad_Button   |
+| ------ | ------ | ------------------ |
+| ESP32  | GPIO33 | GPIO12             |
+
+Touch_Pad 与 Pin 对照表，可见 `touch_pad_button.c` 文件
+
+
 ## 运行现象
 
 * LED闪烁。触摸按键放上手指后，LED闪烁停止。

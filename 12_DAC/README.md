@@ -15,6 +15,15 @@
 ESP32的DAC较为简单，常用的也就2个API，不可更改输出GPIO，仅对原有ESP-IDF的API进行了简单的封装。
 
 
+## 硬件连接
+
+|        | LED    | DAC    |
+| ------ | ------ | ------ |
+| ESP32  | GPIO33 | GPIO25 |
+
+DAC通道 与 Pin 对照表，可见 `dac_output.h` 文件。
+
+
 ## 运行现象
 
 * `DAC channel1`(GPIO25)生成`三角波`，ADC-CH6与DAC直连测量其输出电压值。

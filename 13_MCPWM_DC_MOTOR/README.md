@@ -15,6 +15,21 @@
 ESP32的`MCPWM`较为复杂，建议在大概了解`MCPWM`硬件组成后，再去使用easyIO的API。
 
 
+## 硬件连接
+
+|        | LED    | MOTOR0_PWMA | MOTOR0_PWMB | MOTOR1_PWMA | MOTOR1_PWMB | MOTOR2_PWMA | MOTOR2_PWMB |
+| ------ | ------ | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+| ESP32  | GPIO33 | GPIO25      | GPIO26      | GPIO17      | GPIO18      | GPIO19      | GPIO21      |
+
+每个`ESP32`有2个`MCPWM`，每个`MCPWM`有3个定时器，每个定时器频率都可单独调整，每个定时器分配一个操作器，每个操作器可以有2个GPIO输出。
+
+也就是每个`MCPWM`最多有6个PWM输出，可两两配置为3种频率。每个`ESP32`最多有12通道的`MCPWM`输出。
+
+每个`MCPWM`中的定时器，还可以从`MCPWM_SELECT_SYNC0`、`MCPWM_SELECT_SYNC1`、`MCPWM_SELECT_SYNC2`三个信号源中选择一个，作为同步信号源，实现相位同步、偏移。
+
+`MCPWM`因涉及的内容较多，建议有空查阅ESP32硬件手册。
+
+
 ## 运行现象
 
 - 电机正转2s、反转2s、停止2s，接着正转2s...反复。
