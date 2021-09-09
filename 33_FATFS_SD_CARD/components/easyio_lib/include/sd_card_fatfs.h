@@ -23,7 +23,7 @@
 // 默认情况下，使用SDMMC外设。
 // 要启用SPI模式，请取消注释以下行：
 
-// #define USE_SPI_MODE
+#define USE_SPI_MODE
 
 // ESP32-S2没有SD主机外设，请始终使用SPI：
 #ifdef CONFIG_IDF_TARGET_ESP32S2
@@ -44,10 +44,10 @@
 #ifdef USE_SPI_MODE
 // 使用SPI模式时的引脚映射通过此映射，SD卡既可以在SPI模式下使用，也可以在1线SD模式下使用。
 // 请注意，在SD模式下，需要在CS线上上拉。
-#define PIN_NUM_MISO 2
-#define PIN_NUM_MOSI 15
-#define PIN_NUM_CLK  14
-#define PIN_NUM_CS   13
+#define PIN_NUM_MISO 19
+#define PIN_NUM_MOSI 23
+#define PIN_NUM_CLK  18
+#define PIN_NUM_CS   27
 #endif //USE_SPI_MODE
 
 
@@ -63,6 +63,19 @@
  *     - 为0时则表示SD卡初始化及FATFS挂载失败
  */
 sdmmc_card_t* sd_card_fatfs_init(uint8_t bus_width, uint16_t bus_freq);
+
+/**
+ * @brief  SD卡初始化、FATFS文件系统挂载
+ * 		- 仅限于SPI接口模式，且SPI总线的初始化必须先于本函数。
+ *      - 与先前初始化的SPI设备，共用同一SPI总线 和 DMA通道，默认使用VSPI_HOST的IO_MUX端口，默认CLK频率为20MHz。
+ * 
+ * @param  void
+ * 
+ * @return
+ *     - sdmmc_card_t*：返回SDMMC卡指针，外部可由此获取卡信息。
+ *     - 为0时则表示SD卡初始化及FATFS挂载失败
+ */
+sdmmc_card_t* sd_card_fatfs_spi_init(void);
 
 
 #endif

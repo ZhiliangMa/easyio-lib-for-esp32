@@ -26,6 +26,17 @@
 | lcd              | CLK    | MOSI   | DC     | BLK    | RST    | CS     |
 
 
+## IO_MUX 输出方式下 CLK的速率测试
+
+通过更改 `spi_lcd_init(SPI3_HOST, 40*1000*1000, LCD_SPI3_DEF_PIN_NUM_CS0);` 中的时钟速率，并通过示波器捕获观察实际频率。
+
+`SPI`的GPIO使用 `IO_MUX` 的默认端口时，最大频率可设置为 `80MHz`，示波器实际测得频率为 `80MHz`。
+
+`SPI`的分频为整数，(80/n)。如配置速率为 `60MHz`，示波器实际测得频率则为 `40MHz`。
+
+通过对几种不同驱动IC的屏幕模组测试，`ST7789V` 可完美运行在80MHz。ILI9488、HX8357C 为 40MHz（80MHz会花屏）。ILI9481 仅为 10MHz。
+
+
 ## 运行现象
 
 * LED闪烁。

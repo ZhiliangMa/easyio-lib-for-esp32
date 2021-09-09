@@ -1,0 +1,31 @@
+{
+    "C_Cpp.clang_format_style": "Visual Studio",
+    "editor.formatOnSave": false,
+    "[cpp]": {
+        "editor.quickSuggestions": true
+    },
+    "[c]": {
+        "editor.quickSuggestions": true
+    },
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+    "C_Cpp.default.compilerPath": "D:\\Espressif\\.espressif\\tools\\xtensa-esp32-elf\\esp-2020r3-8.4.0\\xtensa-esp32-elf\\bin\\xtensa-esp32-elf-gcc.exe",
+    "files.associations": {
+        "sdkconfig.h": "c",
+        "gpio.h": "c",
+        "gpio_reg.h": "c",
+        "stdbool.h": "c",
+        "easyio.h": "c",
+        "key.h": "c",
+        "adc_sampling.h": "c",
+        "esp_adc_cal.h": "c",
+        "dac_output.h": "c",
+        "dac.h": "c",
+        "mcpwm_motor.h": "c",
+        "easyio_mcpwm_config.h": "c",
+        "mcpwm_half_bridge.h": "c",
+        "ir_tools.h": "c",
+        "spi_lcd.h": "c",
+        "i2c_ctp_ftxx06_xx36.h": "c",
+        "sd_card_fatfs.h": "c"
+    }
+}

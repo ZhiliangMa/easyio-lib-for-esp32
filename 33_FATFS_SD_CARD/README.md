@@ -38,6 +38,13 @@ N/C           | CD          |         | optional, not used in the example
 N/C           | WP          |         | optional, not used in the example
 
 
+## SDIO/SPI的CLK速率测试
+
+`SDIO`模式下，`CLK`速率可任意配置，常用 `40MHz`、`20MHz`。
+
+`SPI`模式下，因 `SD卡`在SPI模式下最大频率仅为`25MHz`，故配置的值不能超过此项。而在IDF的配置中，`SD-SPI`的默认频率为`20MHz`。
+
+
 ## 运行现象
 
 * LED闪烁。

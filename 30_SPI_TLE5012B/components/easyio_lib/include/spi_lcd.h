@@ -13,11 +13,11 @@
  */
 //#define CONFIG_LCD_TYPE_ST7735     1   // LCD驱动固定，型号为ST7735
 //#define CONFIG_LCD_TYPE_ST7735S    1   // LCD驱动固定，型号为ST7735S
-//#define CONFIG_LCD_TYPE_ST7789V    1   // LCD驱动固定，型号为ST7789V
+//#define CONFIG_LCD_TYPE_ST7789V    1   // LCD驱动固定，型号为ST7789V，CLK最大频率为80MHz
 //#define CONFIG_LCD_TYPE_ILI9341    1   // LCD驱动固定，型号为ILI9341
-//#define CONFIG_LCD_TYPE_ILI9488    1   // LCD驱动固定，型号为ILI9488
+//#define CONFIG_LCD_TYPE_ILI9488    1   // LCD驱动固定，型号为ILI9488，CLK最大频率为40MHz
 //#define CONFIG_LCD_TYPE_ILI9481    1   // LCD驱动固定，型号为ILI9481（配置参数有色偏，且最大CLK只能16MHz。IC已停产，谨慎使用此型号）
-#define CONFIG_LCD_TYPE_HX8357C    1   // LCD驱动固定，型号为HX8357C（这里配置为RGB565，加快刷屏速度）(HX8357C的驱动完全兼容ST7796S)
+#define CONFIG_LCD_TYPE_HX8357C    1   // LCD驱动固定，型号为HX8357C，CLK最大频率为40MHz（默认配置为RGB565，加快刷屏速度）(HX8357C的驱动完全兼容ST7796S)
 
 /**
  * @brief LCD屏幕像素分辨率定义。（需要用户手动配置）
