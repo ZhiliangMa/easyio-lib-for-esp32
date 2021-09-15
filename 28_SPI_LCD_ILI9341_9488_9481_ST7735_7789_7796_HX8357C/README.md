@@ -124,7 +124,11 @@ void LCD_ShowPicture_16b(uint16_t x, uint16_t y, uint16_t length, uint16_t width
 
 * 慎用 ili9481，其最大CLK只能16MHz。且IC已停产，谨慎使用此型号。
 
-* TB上买到的40P - ILI94xx和ILI93xx模组的屏幕接口。不是完全一致的，SPI模式下，有两条相邻的数据线IO是反的。需要兼容性请在硬件设计时注意。
+* TB上买到的`40P`液晶模组。在`SPI模式`下，有两个端口的功能不一致。部分型号的Pin10、Pin11两个端口的功能正好相反，在硬件设计时需要注意兼容性：
+
+ILI9488、ILI9481、ST7796S、HX8357C，这些分辨率为`320x480`的液晶模组，其Pin10、Pin11 的功能为 D/C、SCK。
+
+ST7735、ST7735S、ST7789V、ILI9341，这些分辨率为`240x320`的液晶模组，其Pin10、Pin11 的功能为 SCK、D/C。
 
 * 待更新：
 jpg/jpeg解码

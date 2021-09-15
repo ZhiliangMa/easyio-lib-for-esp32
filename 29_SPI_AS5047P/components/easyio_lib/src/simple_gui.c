@@ -58,11 +58,7 @@ static void LCD_SetCursor(uint16_t Xpos, uint16_t Ypos)
     uint8_t databuf[4] = {0};
 	uint8_t xBase=0,yBase=0;
 
-#ifdef CONFIG_LCD_TYPE_ST7789V
-	// 如果驱动IC为 ST7789V，则需要增加偏移基地址。横屏：x-40，y-52 / 53
-	xBase = 40;
-	yBase = 52;
-#elif defined( CONFIG_LCD_TYPE_ST7735 )
+#ifdef CONFIG_LCD_TYPE_ST7735
 	// 如果驱动IC为 ST7735，则需要增加偏移基地址。横屏：x-3，y-2
 	xBase = 3;
 	yBase = 2;
@@ -101,15 +97,9 @@ static void LCD_SetCursor(uint16_t Xpos, uint16_t Ypos)
  *     - none
  */
 static void LCD_SetWindows(uint16_t xStar, uint16_t yStar,uint16_t xEnd,uint16_t yEnd)
-{	
+{
 	uint8_t databuf[4] = {0};
-#ifdef CONFIG_LCD_TYPE_ST7789V
-	// 如果驱动IC为 ST7789V，则需要增加偏移基地址。横屏：x-40，y-52 / 53
-	xStar += 40; // 加偏移基地址
-	xEnd += 40;  // 加偏移基地址
-	yStar += 52; // 加偏移基地址
-	yEnd += 52;  // 加偏移基地址
-#elif defined( CONFIG_LCD_TYPE_ST7735 )
+#ifdef CONFIG_LCD_TYPE_ST7735
 	// 如果驱动IC为 ST7735，则需要增加偏移基地址。横屏：x-3，y-2
 	xStar += 3; // 加偏移基地址
 	xEnd += 3;  // 加偏移基地址
