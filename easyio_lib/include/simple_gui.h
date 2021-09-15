@@ -16,6 +16,9 @@ typedef struct
 	uint16_t  setycmd;		//设置y坐标指令	 
 }_lcd_dev;
 
+//管理LCD重要参数
+extern _lcd_dev lcddev;
+
 /**
  * @brief LCD的扫描方式定义（扫描方向）
  */

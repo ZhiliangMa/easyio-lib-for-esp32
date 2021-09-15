@@ -31,7 +31,10 @@ set(easyio_srcs
     "src/spi_as5047p.c"
     "src/spi_tle5012b.c"
     "src/i2c_ctp_ftxx06_xx36.c"
-    "src/sd_card_fatfs.c")
+    "src/sd_card_fatfs.c"
+    "src/tjpgd.c"
+    "src/jpg_decode.c"
+    "src/lcd_spi_dma.c")
 
 idf_component_register(SRCS "${easyio_srcs}"
                        INCLUDE_DIRS "include"
@@ -41,4 +44,6 @@ idf_component_register(SRCS "${easyio_srcs}"
                        "${IDF_PATH}/components/fatfs/vfs"
                        "${IDF_PATH}/components/fatfs/src"
                        "${IDF_PATH}/components/wear_levelling/include"
-                       "${IDF_PATH}/components/sdmmc/include")
+                       "${IDF_PATH}/components/sdmmc/include"
+                       EMBED_FILES "pic/image_esp32mcu.jpg" "pic/image_esp32wifi.jpg"
+                       "pic/image_apple.jpg" "pic/image_guy.jpg" "pic/image_wave.jpg")

@@ -7,6 +7,7 @@
 #include "freertos/queue.h"
 #include "driver/gpio.h"
 #include "sdkconfig.h"
+#include <dirent.h>
 
 #include "led.h"
 #include "gpioX.h"
@@ -39,6 +40,8 @@
 #include "nvs_flash.h"
 #include "nvs.h"
 #include "sd_card_fatfs.h"
+#include "jpg_decode.h"
+#include "lcd_spi_dma.h"
 
 
 #endif
