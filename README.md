@@ -15,7 +15,10 @@
 * SPI液晶屏（支持`ST7735`、`ST7735S`、`ST7789V`、`ILI9341`、`ILI9488`、`ILI9481`、`ST7796S`、`HX8357C`8种IC，涵盖3.5寸以下的绝大多数液晶模组）
 * SPI_AS5047P/TLE5012B 磁编码器。
 * FT5/6xxx电容触摸屏。
-* NVS、FATFS、SD_CARD（SPI模式，1/4线SDIO模式）。
+* NVS、FATFS、VFS、SD_CARD（SPI模式，1/4线SDIO模式）。
+* jpg解码（TJpgDec）
+* LCD 可以以 `SPI-DMA 双缓冲环形队列`的方式刷屏。（320x240分辨率，RGB565，SPI以`80MHz`速率通信，最大刷屏帧率`53FPS`；40MHz也能有`30.2FPS`。目前DMA加速仅完美支持`ILI9341`、`ST7789V`两种驱动IC型号的屏幕）
+* LCD显示波动动效。
 
 <br/>
 

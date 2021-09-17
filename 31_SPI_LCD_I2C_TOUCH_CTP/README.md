@@ -19,7 +19,7 @@
 
 |                  | CLK    | MOSI   | DC     | BLK    | RST    | CS     |
 | ---------------- | ------ | ------ | ------ | ------ | ------ | ------ |
-| ESP32 SPI Master | GPIO18 | GPIO23 | GPIO22 | GPIO21 | EN     | GPIO5  |
+| ESP32 SPI Master | GPIO18 | GPIO23 | GPIO22 | GPIO21 | GPIO25 | GPIO5  |
 | lcd              | CLK    | MOSI   | DC     | BLK    | RST    | CS     |
 
 <br/>

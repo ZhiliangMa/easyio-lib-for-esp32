@@ -49,7 +49,7 @@
 #define LCD_SPI3_DEF_PIN_NUM_CS0  5  // SPI3默认的CS0引脚
 
 #define PIN_NUM_DC   22    // D/C线，0-命令，1-数据
-#define PIN_NUM_RST  -1    // RST复位引脚。-1为空置不使用。但LCD的RST引脚应上拉接高电平。
+#define PIN_NUM_RST  25    // RST复位引脚。-1为空置不使用。但LCD的RST引脚应上拉接高电平。
 #define PIN_NUM_BCKL 21    // 背光BLK引脚。0-关闭，1-打开
 
 

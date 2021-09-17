@@ -22,8 +22,27 @@
 
 |                  | CLK    | MOSI   | DC     | BLK    | RST    | CS     |
 | ---------------- | ------ | ------ | ------ | ------ | ------ | ------ |
-| ESP32 SPI Master | GPIO18 | GPIO23 | GPIO22 | GPIO21 | EN     | GPIO5  |
+| ESP32 SPI Master | GPIO18 | GPIO23 | GPIO22 | GPIO21 | GPIO25 | GPIO5  |
 | lcd              | CLK    | MOSI   | DC     | BLK    | RST    | CS     |
+
+
+## 如何修改工程，使其匹配不同的LCD驱动IC ?
+
+本Demo通过对`IDF`的`LCD`例程进行扩展，使得支持的LCD驱动IC型号，从原来的`ili9341`、`st7789`两种，扩展到 ST7735、ST7735S、ST7789V、ILI9341、ILI9488、ILI9481、ST7796S、HX8357C 如此之多。
+
+得益于乐鑫完善的LCD驱动框架，可以很方便的导入不同屏幕的配置文件。`easyio`将整个流程封包，添加了多余屏幕的支持，并留出两个配置LCD的接口`spi_master_init`、`spi_lcd_init`，和一个配置文件 `spi_lcd.h`。
+
+`easyio` 匹配不同驱动IC的`LCD`的步骤：
+
+1. 使用 `spi_master_init` 配置LCD的 `SPI通道` 和 `SCL(SPI-SCK)`、`SDA(SPI-MOSI)` 引脚。(建议使用`IO_MUX`默认的引脚，以支持最大80MHz的通信速率。非`IO_MUX`默认引脚最高仅能27MHz)
+
+2. 使用 `spi_lcd_init` 配置SPI与LCD的 `通信速率` 和 `CS` 引脚。
+
+3. 在 `spi_lcd.h` 中配置 `LCD驱动IC型号`、`LCD像素分辨率`、`屏幕显示方向`、`D/C引脚GPIO`、`RESET引脚GPIO`、`BLK引脚GPIO`。
+
+之后就可调用 `"simple_gui.h"` 中丰富的接口，在lcd上显示 点、线、矩形、圆、数字、字符串、位图图片。
+
+驱动中已对上电顺序进行优化，初始化LCD的过程中不会产生异常闪屏，开启显示后默认显示纯黑。(但因为此时背光已开启，这里的黑并不是完全黑，还是有一部分光会从lcd漏出来)
 
 
 ## IO_MUX 输出方式下 CLK的速率测试
@@ -32,9 +51,11 @@
 
 `SPI`的GPIO使用 `IO_MUX` 的默认端口时，最大频率可设置为 `80MHz`，示波器实际测得频率为 `80MHz`。
 
-`SPI`的分频为整数，(80/n)。如配置速率为 `60MHz`，示波器实际测得频率则为 `40MHz`。
+配置速率为 `60MHz`，示波器实际测得频率则为 `40MHz`。
 
-通过对几种不同驱动IC的屏幕模组测试，`ST7789V` 可完美运行在80MHz。ILI9488、HX8357C 为 40MHz（80MHz会花屏）。ILI9481 仅为 10MHz。
+配置速率为 `40MHz`，示波器实际测得频率则为 `40MHz`。
+
+通过对几种不同驱动IC的屏幕模组测试，`ST7789V` 可完美运行在80MHz。ILI9488、HX8357C 为 40MHz（80MHz会花屏）。ILI9481 仅为 10MHz。结果可能有差异，仅供参考。(大多数IC的SPI通信跑在40MHz都没问题，很稳定也不会花屏)
 
 
 ## 运行现象
@@ -54,7 +75,7 @@
 
 4. 在lcd上显示 点、线、矩形、圆、数字、字符串、位图图片。
 
-ESP32驱动LCD液晶屏选型，SPI写LCD的GRAM时序：https://blog.csdn.net/Mark_md/article/details/115620490?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163065547716780366549101%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=163065547716780366549101&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_v29-1-115620490.pc_v2_rank_blog_default&utm_term=lcd&spm=1018.2226.3001.4450
+扩展了解：[ESP32驱动LCD液晶屏的选型，SPI写LCD的GRAM时序](https://blog.csdn.net/Mark_md/article/details/115620490?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163065547716780366549101%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=163065547716780366549101&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_v29-1-115620490.pc_v2_rank_blog_default&utm_term=lcd&spm=1018.2226.3001.4450)
 
 
 ## 关键函数
@@ -130,7 +151,83 @@ ILI9488、ILI9481、ST7796S、HX8357C，这些分辨率为`320x480`的液晶模�
 
 ST7735、ST7735S、ST7789V、ILI9341，这些分辨率为`240x320`的液晶模组，其Pin10、Pin11 的功能为 SCK、D/C。
 
-* 待更新：
-jpg/jpeg解码
-FATFS文件系统，从sd卡读取jpg/jpeg文件
-增加LVGL-GUI
+* 后续更新：
+
+SD卡、FATFS文件系统、VFS、SD卡与LCD共用一条SPI。
+
+jpg/jpeg解码。
+
+`SPI-DMA双缓存环形队列`，刷屏，有图像缓存的情况下，ESP32可以很高效的利用SPI的带宽。`320x240`分辨率，RGB565像素格式，以理论80MHz计算，满带宽下可以65.1FPS。而实际在有图片缓存的情况下，`SPI-DMA双缓存环形队列`可以达到53FPS。40MHz的带宽利用率更高一些，可达30FPS。（但ESP32的浮点运算好像不怎么样，运行乐鑫的波动动效Demo，因为浮点运算的拖累，导致上一帧DMA已经发送完了，可下一帧的图像还在计算中，还是要等计算完成才能发送下一帧，于是被拖累了显示成绩，只有18FPS）（见Demo-`36_JPG_LCD_DMA_EFFECT`）
+
+GUI-LVGL-Demo。
+
+
+## 乐鑫LCD驱动框架解读
+
+以下比较啰嗦，仅作经验之谈。
+
+因为我是在搞完easyio后，才对LVGL官方的ESP32例程进行了解。`lv_port_esp32`支持了更多的LCD和触摸驱动IC型号、并且把屏幕和触摸的驱动部分都做好了。clone工程后，只需要menuconfig配置下驱动IC型号、时钟速度等基本硬件信息，就能够编译下载了。
+
+在LVGL的测试过程中，发现`lv_port_esp32`对`st7789`的支持并不好，可能是自己买到的驱动IC型号为`st7789V`的缘故，显示时严重花屏，而相同配置下，选择`ili9341`编译输出，则能正常显示GUI界面。
+
+因`st7789`与`ili9341`的刷GRAM的方式相同，唯一不同的是上电后的寄存器配置。
+
+由于有前面写easyio时积累的LCD配置经验，于是着手对LVGL的`st7789`驱动进行更改。更改的时候发现，LVGL官方Demo的LCD驱动，也是沿用乐鑫`lcd`例程的那一套。这一下就方便多了，把 `st_7789V_init_cmds` 直接替换掉，LCD就可以正确显示了。
+
+乐鑫`lcd`例程对LCD驱动IC的配置文件写入，`easyio`将其封装为了`lcd_ic_init`，关键代码也只有下面这么几句：
+```c
+    // 将spi_lcd.h 中的参数写入LCD驱动IC
+    while (lcd_init_cmds[cmd].databytes!=0xff) {
+        lcd_cmd(spi, lcd_init_cmds[cmd].cmd);
+        lcd_data(spi, lcd_init_cmds[cmd].data, lcd_init_cmds[cmd].databytes&0x1F);
+        if (lcd_init_cmds[cmd].databytes&0x80) {
+            vTaskDelay(10 / portTICK_RATE_MS);
+        }
+        cmd++;
+    }
+```
+
+驱动IC的每个寄存器配置项，被拆分为成了`结构体` - `lcd_init_cmd_t`。一个IC的所有配置文件，被整合成`结构体数组`，位于 `spi_lcd.h`文件中。
+
+上面的代码通过判断结构体中的`databytes`，来向LCD写入配置文件。
+
+```c
+/*
+ LCD初始化需要的一堆命令/参数值。 它们存储在此结构中。
+*/
+typedef struct {
+    uint8_t cmd;
+    uint8_t data[16];
+    uint8_t databytes; //No of data in data; bit 7 = delay after set; 0xFF = end of cmds.
+} lcd_init_cmd_t;
+```
+
+不同内容的`databytes`有不同的含义，其定义为：
+
+* 如果`databytes`大于1，且不为`0xff`，则向LCD的寄存器地址写入指定字节数的数据。
+
+向`0x3A`写入`1`个字节`0x05`；向`0xB2`写入`5`个字节`0x0c, 0x0c, 0x00, 0x33, 0x33`。
+```c
+    /* Interface Pixel Format, 16bits/pixel for RGB/MCU interface */
+    {0x3A, {0x05}, 1},
+    /* Porch Setting */
+    {0xB2, {0x0c, 0x0c, 0x00, 0x33, 0x33}, 5},
+```
+
+* 如果`databytes`为`0x80`，则发送`单字节命令`，发送完成后会延时10ms继续发送下一帧命令。单字节命令通常有`0x11`退出休眠、`0x29`开启显示、`0x2C`写GRAM。
+```c
+    /* Sleep Out */
+    {0x11, {0}, 0x80},
+    /* Display On */
+    {0x29, {0}, 0x80},
+```
+* 而一旦`databytes`为`0xff`，则意味着LCD配置文件的写入完成，退出循环。之后就可以操作GRAM和背光，让LCD显示出图像。这个会放在配置文件的最末尾。
+```c
+    {0, {0}, 0xff}
+```
+
+以上的配置文件，因不同型号的驱动IC参数不一致，需要每个型号一组单独的配置文件。
+
+而刷屏则简单很多，流程也都相同。
+
+用 `LCD_SetCursor` 或 `LCD_SetWindows` 设置`光标位置`、`写入GRAM的范围`。之后将RGB像素内容写入GRAM，图像就会在液晶屏上被显示出来。

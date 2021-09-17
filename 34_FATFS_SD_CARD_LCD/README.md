@@ -28,7 +28,7 @@ N/C           |         | D1          |         |
 N/C           |         | D2          |         |
 GPIO27        | CS_SD   | D3          |         |
 GPIO5         | CS_LCD  |             | CS      |
-EN            |         |             | RESET   |
+GPIO25        |         |             | RESET   |
 GPIO22        |         |             | D/C     |
 GPIO21        |         |             | BLK     |
 

@@ -13,8 +13,8 @@
  */
 //#define CONFIG_LCD_TYPE_ST7735     1   // LCD驱动固定，型号为ST7735
 //#define CONFIG_LCD_TYPE_ST7735S    1   // LCD驱动固定，型号为ST7735S
-//#define CONFIG_LCD_TYPE_ST7789V    1   // LCD驱动固定，型号为ST7789V，CLK最大频率为80MHz
-#define CONFIG_LCD_TYPE_ILI9341    1   // LCD驱动固定，型号为ILI9341
+#define CONFIG_LCD_TYPE_ST7789V    1   // LCD驱动固定，型号为ST7789V，CLK最大频率为80MHz
+//#define CONFIG_LCD_TYPE_ILI9341    1   // LCD驱动固定，型号为ILI9341
 //#define CONFIG_LCD_TYPE_ILI9488    1   // LCD驱动固定，型号为ILI9488，CLK最大频率为40MHz
 //#define CONFIG_LCD_TYPE_ILI9481    1   // LCD驱动固定，型号为ILI9481（配置参数有色偏，且最大CLK只能16MHz。IC已停产，谨慎使用此型号）
 //#define CONFIG_LCD_TYPE_HX8357C    1   // LCD驱动固定，型号为HX8357C，CLK最大频率为40MHz（默认配置为RGB565，加快刷屏速度）(HX8357C的驱动完全兼容ST7796S)
@@ -49,7 +49,7 @@
 #define LCD_SPI3_DEF_PIN_NUM_CS0  5  // SPI3默认的CS0引脚
 
 #define PIN_NUM_DC   22    // D/C线，0-命令，1-数据
-#define PIN_NUM_RST  -1    // RST复位引脚。-1为空置不使用。但LCD的RST引脚应上拉接高电平。
+#define PIN_NUM_RST  25    // RST复位引脚。-1为空置不使用。但LCD的RST引脚应上拉接高电平。
 #define PIN_NUM_BCKL 21    // 背光BLK引脚。0-关闭，1-打开
 
 

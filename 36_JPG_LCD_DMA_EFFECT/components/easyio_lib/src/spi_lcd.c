@@ -147,7 +147,7 @@ static void lcd_ic_init(spi_device_handle_t spi)
     gpio_set_level(PIN_NUM_RST, 0);
     vTaskDelay(100 / portTICK_RATE_MS);
     gpio_set_level(PIN_NUM_RST, 1);
-    vTaskDelay(100 / portTICK_RATE_MS);
+    vTaskDelay(200 / portTICK_RATE_MS);
 
     /*// 检测LCD的驱动IC型号，以作驱动适配
     uint32_t lcd_id = lcd_get_id(spi);
@@ -251,9 +251,6 @@ void spi_lcd_init(spi_host_device_t host_id, uint32_t clk_speed, gpio_num_t cs_i
     // LCD 驱动IC的参数配置（自动识别始终不成功、需要到.h文件中手动配置）
     lcd_ic_init(LCD_SPI);
 
-    // 点亮背光
-    gpio_set_level(PIN_NUM_BCKL, 1);
-
     // 设置LCD的安装方向、及横竖方向的像素数目（需要与下面的扫描方式保持一致）
 	LCD_Display_Resolution(horizontal);
 
@@ -269,6 +266,13 @@ void spi_lcd_init(spi_host_device_t host_id, uint32_t clk_speed, gpio_num_t cs_i
     //LCD_Display_Dir(horizontal, invert_dis, mirror_en); // 横屏、不倒置(正着摆放)、镜像
     //LCD_Display_Dir(horizontal, invert_en, mirror_dis); // 横屏、倒置(倒立摆放)、不镜像
     //LCD_Display_Dir(horizontal, invert_en, mirror_en); // 横屏、倒置(倒立摆放)、镜像
+
+    // 清屏，使用纯黑，避免之后点亮背光产生突兀的闪烁
+    LCD_Clear(BLACK);
+    vTaskDelay(20 / portTICK_RATE_MS);
+
+    // 点亮背光
+    gpio_set_level(PIN_NUM_BCKL, 1);
 }
 
 // 推荐一个很全的LCD驱动库，arduino 的TFT_eSPI库：https://github.com/Bodmer/TFT_eSPI/blob/master/TFT_Drivers/ILI9341_Init.h
