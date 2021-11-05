@@ -24,8 +24,8 @@ void i2c_mpu6050_task(void* arg)
 {
     int16_t accel[3],gyro[3];
 
-    // 配置I2C0-主机模式，400K，指定 SCL-16，SDA-17
-    i2c_master_init(I2C_NUM_0, 400000, GPIO_NUM_16, GPIO_NUM_17);
+    // 配置I2C0-主机模式，400K，指定 SCL-14，SDA-4
+    i2c_master_init(I2C_NUM_0, 400000, GPIO_NUM_14, GPIO_NUM_4);
     // 初始化 MPU6050/9250。检测 MPU6050/9250。并通过I2Cx总线写寄存器，来对功能进行配置。
     i2c_mpu6050_init(I2C_NUM_0);
 

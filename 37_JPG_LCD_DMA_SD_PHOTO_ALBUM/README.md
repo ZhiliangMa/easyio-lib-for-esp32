@@ -24,7 +24,7 @@ GPIO23        | MOSI    | CMD         | SDA     |
 GPIO19        | MISO    | D0          |         |
 N/C           |         | D1          |         |
 N/C           |         | D2          |         |
-GPIO27        | CS_SD   | D3          |         |
+GPIO26        | CS_SD   | D3          |         |
 GPIO5         | CS_LCD  |             | CS      |
 GPIO25        |         |             | RESET   |
 GPIO22        |         |             | D/C     |

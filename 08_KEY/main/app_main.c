@@ -3,6 +3,9 @@
 
 #define LED 33
 #define KEY 0
+#define KEY_USR 27
+
+static const char *TAG = "main";
 
 // 任务句柄，包含创建任务的所有状态，对任务的操作都通过操作任务句柄实现
 TaskHandle_t led_task_Handler;
@@ -23,7 +26,8 @@ void led_task(void* arg)
 void key_scan_task(void* arg)
 {
     //按键检测任务
-    key_scan(1, KEY);
+    //key_scan(1, KEY); // 1个按键
+    key_scan(2, KEY, KEY_USR); // 2个按键
 }
 
 // key_catch_task 任务。去捕获按键事件，并控制LED任务状态。
@@ -40,13 +44,15 @@ void key_catch_task(void* arg)
             key_gpio = key_event & 0x0000FFFF; // 按键值
             key_type = key_event >> 16; // 按键类型（1为短按，2为长按）
 
-            if(key_gpio == KEY) {
+            ESP_LOGW(TAG, "key:%d, type:%d\n", key_gpio, key_type); // 输出按键事件
+
+            if(key_gpio == KEY) { // 使用 KEY 控制LED运行状态
                 if(key_type == 1) { // 1，短按，暂停LED任务
                     vTaskSuspend(led_task_Handler); // 暂停任务，LED停止闪烁
+                    led_set(LED, 0);
                 }else if(key_type == 2) { // 2，长按，继续LED任务
                     vTaskResume(led_task_Handler); // 继续任务，LED继续闪烁
                 }
-                printf("key:%d, type:%d\n", key_gpio, key_type); // 输出按键事件
             }
         }
     }
@@ -59,6 +65,6 @@ void app_main(void)
 
     // 创建 key_scan_task 任务，运行任务栈空间大小为 4096，任务优先级为3。实测分配小于2048会导致开机反复重启
     xTaskCreate(key_scan_task, "key_scan_task", 4096, NULL, 3, NULL);
-    // 创建 key_catch_task 任务，任务栈空间大小为 2048，任务优先级为3。去捕获按键事件，并控制LED任务状态。
-    xTaskCreate(key_catch_task, "key_catch_task", 2048, NULL, 2, NULL);
+    // 创建 key_catch_task 任务，任务栈空间大小为 4096，任务优先级为3。去捕获按键事件，并控制LED任务状态。
+    xTaskCreate(key_catch_task, "key_catch_task", 4096, NULL, 2, NULL);
 }

@@ -1,0 +1,30 @@
+menu "Example Configuration"
+
+    config BLINK_GPIO
+        int "Blink GPIO number"
+        range 0 34
+        default 5
+        help
+            GPIO number (IOxx) to blink on and off.
+
+            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to blink.
+
+            GPIOs 35-39 are input-only so cannot be used as outputs.
+    
+    config EXAMPLE_IPV4
+        bool "IPV4"
+        default y
+
+    config EXAMPLE_IPV6
+        bool "IPV6"
+        default n
+        select EXAMPLE_CONNECT_IPV6
+
+    config EXAMPLE_PORT
+        int "Port"
+        range 0 65535
+        default 3333
+        help
+            Local port the example server will listen on.
+
+endmenu

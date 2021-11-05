@@ -31,6 +31,8 @@
 
 #define MPU6050_VAL_WHO_AM_I            0x68    // MPU6050的 WHO_AM_I 寄存器默认值
 #define MPU9250_VAL_WHO_AM_I            0x71    // MPU9250的 WHO_AM_I 寄存器默认值
+#define ICM20600_VAL_WHO_AM_I           0x11    // ICM20600的 WHO_AM_I 寄存器默认值
+#define ICM20602_VAL_WHO_AM_I           0x12    // ICM20602的 WHO_AM_I 寄存器默认值
 #define ICM20608_VAL_WHO_AM_I           0xAE    // ICM20608的 WHO_AM_I 寄存器默认值
 
 

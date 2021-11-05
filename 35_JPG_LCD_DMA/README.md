@@ -15,7 +15,7 @@
 
 `tjpgd.c.h`： jpg解码器`TJpgDec`的源码。
 
-`jpg_decode.c.h`： 为jpg解码的流程。参照了lcd例程的`decode_image.c.h`，并在此上进行的优化，可进行重复解码（`decode_image.c.h`在解码后马上就释放了内存）
+`jpg_decode.c.h`： 为jpg解码的流程。参照了lcd例程的`decode_image.c.h`，并在此上进行的优化，可进行重复解码（内存一直被占用，而`decode_image.c.h`在解码后马上就释放了内存）
 
 `lcd_spi_dma.c.h`： 为`SPI-DMA 双缓冲环形队列`刷液晶屏。`easyio`已将其封装好，只需要调用`lcd_spi_dma_display_init();`和`lcd_spi_dma_display_img(spi_device_handle_t spi, uint16_t ***pixels);`即可使用完整功能。
 

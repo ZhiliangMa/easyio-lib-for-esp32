@@ -33,11 +33,6 @@ static int32_t i2c_mpu6050_check(i2c_port_t i2c_num)
 
     // 读取 WHO_AM_I 寄存器，判断总线上是否存在 MPU6050/9250 器件
     i2c_mpu6050_read(i2c_num, MPU6050_REG_WHO_AM_I, &test, 1);
-    if ((test != MPU6050_VAL_WHO_AM_I) && (test != MPU9250_VAL_WHO_AM_I) && (test != ICM20608_VAL_WHO_AM_I)) {
-        ESP_LOGE(TAG, "IIC%d BUS do not found MPU6050/9250 or ICM2060x device", i2c_num);
-        return 1; // 返回错误：总线上不存在 MPU6050/9250 器件
-    }
-
     // 打印器件型号
     switch (test) {
         case MPU6050_VAL_WHO_AM_I:
@@ -46,11 +41,18 @@ static int32_t i2c_mpu6050_check(i2c_port_t i2c_num)
         case MPU9250_VAL_WHO_AM_I:
             ESP_LOGI(TAG, "WHO_AM_I Data: 0x%02x\tMPU9250", test);
             break;
+        case ICM20600_VAL_WHO_AM_I:
+            ESP_LOGI(TAG, "WHO_AM_I Data: 0x%02x\tICM20600", test);
+            break;
+        case ICM20602_VAL_WHO_AM_I:
+            ESP_LOGI(TAG, "WHO_AM_I Data: 0x%02x\tICM20602", test);
+            break;
         case ICM20608_VAL_WHO_AM_I:
             ESP_LOGI(TAG, "WHO_AM_I Data: 0x%02x\tICM20608", test);
             break;
         default:
-            ESP_LOGI(TAG, "WHO_AM_I Data: 0x%02x\tnot found device", test);
+            ESP_LOGI(TAG, "WHO_AM_I Data: 0x%02x\tIIC%d BUS do not found MPU6050/9250 or ICM2060x device", test, i2c_num);
+            return 1; // 返回错误：总线上不存在 MPU6050/9250 器件
     }
 
     // 向 SMPLRT_DIV 寄存器写 0x23 测试值，再读回看是否与写入的一致。判断芯片是否是坏片

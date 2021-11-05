@@ -14,14 +14,21 @@
 
 鉴于ESP32的ADC校准补偿比较麻烦，且注意事项过多，不建议了解硬件细节，直接使用easyIO封装好的函数去调用。
 
+更多ESP32的ADC介绍，详见在线文档：(ESP32 ADC模/数转换器)[https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html]
+
 
 ## 硬件连接
 
-|        | LED    | ADC(光敏电阻)   |
-| ------ | ------ | -------------- |
-| ESP32  | GPIO33 | GPIO39         |
+|        | LED    | ADC_BAT(电池电压)   | ADC_PD(光敏)       | ADC_CON(采样电源控制) |
+| ------ | ------ | ------------------ | ------------------ | -------------------- |
+| ESP32  | GPIO33 | SENSOR_VP - GPIO36 | SENSOR_VN - GPIO39 | GPIO12               |
 
 ADC1 channel 与 Pin 对照表，可见 `adc_sampling.c` 文件。
+
+【注意】：`ESP32-IOT-KIT`开发板在使用ADC，测量板载 `电池电压` 和 `光敏电压`时，需将`ADC_CON`输出为高电平（gpiox_set_ppOutput(14, 1);），
+开通光敏电路和电池分压采样电路的供电。当ADC闲时，ADC_CON可设置输出为0，关断电压输出，以降低分压电阻上功耗。
+
+PMOS电子开关电路原理可见：[](https://blog.csdn.net/Mark_md/article/details/116982478?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163419403716780366527870%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=163419403716780366527870&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_v29-1-116982478.pc_v2_rank_blog_default&utm_term=%E4%BD%8E%E5%8A%9F%E8%80%97&spm=1018.2226.3001.4450)
 
 
 ## 运行现象
@@ -59,9 +66,14 @@ uint32_t adc1_cal_get_voltage_mul(adc_channel_t channel, uint32_t mul_num);
 
 ## 注意事项
 
+- `ESP32-IOT-KIT`开发板在使用ADC，测量板载 `电池电压` 和 `光敏电压`时，需将`ADC_CON`输出为高电平（gpiox_set_ppOutput(14, 1);），
+开通光敏电路和电池分压采样电路的供电。当ADC闲时，ADC_CON可设置输出为0，关断电压输出，以降低分压电阻上功耗。
+
 - 由于`ADC2`不能与`WIFI`共用，所以尽量优先使用ADC1，且ADC2的读取方式与ADC1不同，也就没有在esayIO中提供ADC2的初始化和读取函数。况且ADC1已经满足绝大多数场景使用，没必要因为ADC2给驱动库编写带来麻烦。
 
 - TP两点校准值是用户自己测量，并刻录到`eFuse`中。而`eFuse Vref`由工厂生产时刻录。（就是说芯片刚出厂只会有Vref）
+
+- 不同的衰减系数，对应的ESP32引脚输入范围为：0：75~1008mV。2.5：78~1317mV。6：107~1821mV。11：142~3108mV。超过衰减系数的电压输入范围，可能导致ADC损毁。
 
 - 不同的衰减系数，会影响输入电压量程，但会影响经校准补偿后的值。且衰减越大，对读数准确性的影响也越大。尽量使用 `较低的衰减系数`，以获得更高的测量精度。
 

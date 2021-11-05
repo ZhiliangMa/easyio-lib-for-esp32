@@ -15,6 +15,8 @@
         "gpio_reg.h": "c",
         "stdbool.h": "c",
         "easyio.h": "c",
-        "key.h": "c"
+        "key.h": "c",
+        "esp_log.h": "c",
+        "*.inc": "c"
     }
 }

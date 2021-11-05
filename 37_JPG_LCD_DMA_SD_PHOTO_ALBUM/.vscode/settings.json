@@ -37,6 +37,7 @@
         "*.ipp": "c",
         "*.tcc": "c",
         "fstream": "c",
-        "ffconf.h": "c"
+        "ffconf.h": "c",
+        "i2c_mpu6050.h": "c"
     }
 }

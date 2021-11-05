@@ -1,6 +1,7 @@
 
 #include "key.h"
 
+static const char *TAG = "KEY";
 //按键跳变沿事件，的队列句柄（有抖动信息，不能直接使用。要使用经过二次处理的 key_evt_queue）
 static xQueueHandle edge_evt_queue = NULL;
 //按键触发事件，的队列句柄（过滤过按键抖动，存储着短按、长按信息事件）供外部应用调用。
@@ -120,15 +121,15 @@ void key_scan(int key_num, ...)
                     //向队列发送消息，用户可以在外部应用使用 key_evt_queue 来获取按键事件。
                     xQueueSend(key_evt_queue, &pressed_type, 10);
                     #if key_Dlog
-                    //调试信息，打印按键按下的时长（低电平持续时间）、按键类型（1为短按，2为长按）
-                    printf("Key:%d, Pulse: %lld ms, Type: %d\n", key_gpio, key_Event[key_gpio].Pulse_time/1000, key_Event[key_gpio].pressed_type);
+                    //调试信息，打印 按键值、按键按下的时长（低电平持续时间）、按键类型（1为短按，2为长按）
+                    ESP_LOGI(TAG, "Key:%d, Pulse: %lld ms, Type: %d\n", key_gpio, key_Event[key_gpio].Pulse_time/1000, key_Event[key_gpio].pressed_type);
                     #endif
                 }else
                     key_Event[key_gpio].pressed_type = 0;
             }
             #if key_Dlog
-            //调试信息，打印按键触发的边沿类型（下降沿为0，上升沿为1）、系统时间
-            printf("Key:%d, GPIO INTR, Edge: %d, SYS_TIME: %lld\n", key_gpio, key_Event[key_gpio].edge, key_Event[key_gpio].now_time);
+            //调试信息，打印 按键值、按键触发的边沿类型（下降沿为0，上升沿为1）、系统时间
+            ESP_LOGI(TAG, "Key:%d, Edge: %d, SYS_TIME: %lld\n", key_gpio, key_Event[key_gpio].edge, key_Event[key_gpio].now_time);
             #endif
         }
     }

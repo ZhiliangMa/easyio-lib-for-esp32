@@ -8,8 +8,9 @@
 #include "driver/gpio.h"
 #include "gpioX.h"
 #include <stdarg.h>
+#include "esp_log.h"
 
-//MCU的GPIO的最大序号，或者说使用的KEY的GPIO序号最大多大，这个必须大于。当然越大使用的栈空间就越大。
+//ESP32的GPIO的最大序号。或者说使用的KEY的GPIO序号最大多大，这个则必须大于它。当然不能无限大，此值越大使用的栈空间就越大。
 #define MAX_GPIO    36
 
 //滤除按键抖动，的阈值。8000 = 8ms

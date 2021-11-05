@@ -23,6 +23,7 @@
         "mcpwm_motor.h": "c",
         "easyio_mcpwm_config.h": "c",
         "mcpwm_half_bridge.h": "c",
-        "ir_tools.h": "c"
+        "ir_tools.h": "c",
+        "uart_config.h": "c"
     }
 }

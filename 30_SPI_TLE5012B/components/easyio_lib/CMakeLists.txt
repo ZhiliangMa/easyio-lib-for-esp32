@@ -25,6 +25,8 @@ set(easyio_srcs
     "src/i2c_config.c"
     "src/i2c_mpu6050.c"
     "src/i2c_aht20.c"
+    "src/i2c_sht30.c"
+    "src/i2c_pcf8563.c"
     "src/spi_config.c"
     "src/spi_lcd.c"
     "src/simple_gui.c"

@@ -19,6 +19,8 @@ ESP32的 `UART` 硬件，用于UART串口通信。
 
 ## 运行现象
 
+* 将`ESP32-IOT-KIT`开发板的J8，用跳线帽将 IO13 与 IO15 短接。编译、下载、运行Demo。
+
 * LED闪烁。
  
 * 硬件上将 `uart1-tx` 与 `uart1-tx` 的引脚连接。打开调试窗口，可以接收到消息 "uart1, Hello!"。
@@ -49,4 +51,4 @@ int uart_read_bytes(uart_port_t uart_num, void* buf, uint32_t length, TickType_t
 ## 注意事项
 
 * uart可以映射到除仅能做输入 和 6、7、8、9、10、11之外的任意端口。
-除了uart0，没有默认端口这一说。
+除了uart0，其他的uart没有默认端口，均可任意IO映射。

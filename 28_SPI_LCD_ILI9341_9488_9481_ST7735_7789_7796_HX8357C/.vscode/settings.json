@@ -24,6 +24,7 @@
         "easyio_mcpwm_config.h": "c",
         "mcpwm_half_bridge.h": "c",
         "ir_tools.h": "c",
-        "spi_lcd.h": "c"
+        "spi_lcd.h": "c",
+        "simple_gui.h": "c"
     }
 }

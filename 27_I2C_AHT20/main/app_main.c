@@ -27,8 +27,8 @@ struct m_AHT20 AHT20;
 // i2c_aht20_task 任务。初始化AHT20温湿度传感器，读取温湿度
 void i2c_aht20_task(void* arg)
 {
-    // 配置I2C0-主机模式，400K，指定 SCL-16，SDA-17
-    i2c_master_init(I2C_NUM_0, 400000, GPIO_NUM_16, GPIO_NUM_17);
+    // 配置I2C0-主机模式，400K，指定 SCL-14，SDA-4
+    i2c_master_init(I2C_NUM_0, 400000, GPIO_NUM_14, GPIO_NUM_4);
     // AHT20温湿度传感器初始化
     AHT20.alive = !i2c_aht20_init(I2C_NUM_0);
 

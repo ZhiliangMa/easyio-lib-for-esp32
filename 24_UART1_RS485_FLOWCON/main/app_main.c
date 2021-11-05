@@ -23,10 +23,10 @@ void led_task(void* arg)
 
 static const char *TAG = "RS485_ECHO";
 
-// uart_rs485_echo_task 任务。配置RS485端口，配置uartx，硬件流控485，实现RS485消息回传。
+// uart_rs485_echo_task 任务。配置RS485端口，配置uartx，硬件流控485，实现RS485消息接受与回传。
 void uart_rs485_echo_task(void* arg)
 {
-    uart_rs485_init_with_hwfc(UART_USED, 115200, GPIO_NUM_12, GPIO_NUM_13, GPIO_NUM_14, UART_PIN_NO_CHANGE, 0, NULL);
+    uart_rs485_init_with_hwfc(UART_USED, 115200, GPIO_NUM_15, GPIO_NUM_13, GPIO_NUM_2, UART_PIN_NO_CHANGE, 0, NULL);
 
     // Allocate buffers for UART
     uint8_t* data = (uint8_t*) malloc(RX_BUF_SIZE+1);

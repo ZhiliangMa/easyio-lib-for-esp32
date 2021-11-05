@@ -120,6 +120,47 @@ esp_err_t i2c_master_read_slave_reg(i2c_port_t i2c_num, uint8_t slave_addr, uint
 }
 
 /**
+ * @brief  I2Cx-读从设备的寄存器值（寄存器地址 或 命令 为2字节的器件）
+ *      - 带有读器件寄存器的方式，适用于 SHT20、GT911 这种寄存器地址为16位的I2C设备
+ *      - 例：i2c_master_read_slave_reg_16bit(I2C_NUM_0, 0x44, 0xE000, &test, 6, 100 / portTICK_RATE_MS);
+ * 
+ * ____________________________________________________________________________________________________________________________________________________
+ * | start | slave_addr + rd_bit + ack | reg_addr(2byte) + ack | start | slave_addr + wr_bit + ack | read n-1 bytes + ack | read 1 byte + nack | stop |
+ * --------|---------------------------|-------------------------------|---------------------------|----------------------|--------------------|------|
+ * 
+ * @param  i2c_num I2C端口号。I2C_NUM_0 / I2C_NUM_1
+ * @param  slave_addr I2C读从机的器件地址
+ * @param  reg_addr I2C读从机的寄存器地址(2byte)
+ * @param  data_rd 读出的值的指针，存放读取出的数据
+ * @param  size 读取的寄存器数目
+ * @param  ticks_to_wait 超时等待时间
+ * 
+ * @return
+ *     - esp_err_t
+ */
+esp_err_t i2c_master_read_slave_reg_16bit(i2c_port_t i2c_num, uint8_t slave_addr, uint16_t reg_addr, uint8_t *data_rd, size_t size, TickType_t ticks_to_wait)
+{
+    if (size == 0) {
+        return ESP_OK;
+    }
+    i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+    i2c_master_start(cmd);
+    i2c_master_write_byte(cmd, (slave_addr << 1) | I2C_MASTER_WRITE, ACK_CHECK_EN);
+    i2c_master_write_byte(cmd, reg_addr>>8, ACK_CHECK_EN);
+    i2c_master_write_byte(cmd, reg_addr, ACK_CHECK_EN);
+    i2c_master_start(cmd);
+    i2c_master_write_byte(cmd, (slave_addr << 1) | I2C_MASTER_READ, ACK_CHECK_EN);
+    if (size > 1) {
+        i2c_master_read(cmd, data_rd, size - 1, ACK_VAL);
+    }
+    i2c_master_read_byte(cmd, data_rd + size - 1, NACK_VAL);
+    i2c_master_stop(cmd);
+    esp_err_t ret = i2c_master_cmd_begin(i2c_num, cmd, ticks_to_wait);
+    i2c_cmd_link_delete(cmd);
+    return ret;
+}
+
+/**
  * @brief  I2Cx-写从设备的值
  *      - 不带有写器件寄存器的方式，适用于 BH1750、ADS1115/1118等少数I2C设备，这类设备通常内部寄存器很少
  *      - 例：i2c_master_write_slave(I2C_NUM_0, 0x68, &test, 1, 100 / portTICK_RATE_MS);

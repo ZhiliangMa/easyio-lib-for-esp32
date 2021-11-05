@@ -34,7 +34,7 @@ static int32_t i2c_ctp_FTxxxx_check(i2c_port_t i2c_num)
     i2c_ctp_FTxxxx_read(i2c_num, CTP_FTxxxx_CIPHER, &test, 1);
     
     if (test==0) {
-        ESP_LOGE(TAG, "IIC%d BUS do not found CTP FTxxxx device", i2c_num);
+        ESP_LOGE(TAG, "IIC%d BUS do not found CTP FTxxxx device,ERR: 0x%02X", i2c_num, test);
         return 1;
     } else {
         // 读到的值不为0，则证明I2C总线上存在器件

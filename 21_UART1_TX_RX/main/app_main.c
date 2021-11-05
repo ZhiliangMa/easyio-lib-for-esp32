@@ -24,9 +24,8 @@ void led_task(void* arg)
 // uart_tx_task 任务。配置uart1-tx，通过串口发送数据
 void uart_tx_task(void* arg)
 {
-    //uart_init_no_hwfc(UART_NUM_1, 115200, GPIO_NUM_12, GPIO_NUM_13, 0, NULL);
-    //uart_init_no_hwfc(UART_NUM_2, 115200, GPIO_NUM_12, GPIO_NUM_13, 0, NULL);
-    uart_init_no_hwfc(UART_NUM_1, 115200, GPIO_NUM_4, GPIO_NUM_12, 0, NULL);
+    //uart_init_no_hwfc(UART_NUM_2, 115200, GPIO_NUM_15, GPIO_NUM_13, 0, NULL);
+    uart_init_no_hwfc(UART_NUM_1, 115200, GPIO_NUM_15, GPIO_NUM_13, 0, NULL);
     while (1) {
         uart_sendData(UART_NUM_1, "uart1, Hello!");
         //uart_sendData(UART_NUM_2, "uart2, Hello!");

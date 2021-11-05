@@ -8,6 +8,7 @@
 #include "driver/gpio.h"
 #include "gpioX.h"
 #include <stdarg.h>
+#include "esp_log.h"
 
 //MCU的GPIO的最大序号，或者说使用的KEY的GPIO序号最大多大，这个必须大于。当然越大使用的栈空间就越大。
 #define MAX_GPIO    36

@@ -30,6 +30,8 @@
 #include "i2c_config.h"
 #include "i2c_mpu6050.h"
 #include "i2c_aht20.h"
+#include "i2c_sht30.h"
+#include "i2c_pcf8563.h"
 #include "spi_config.h"
 #include "spi_lcd.h"
 #include "simple_gui.h"

@@ -22,9 +22,9 @@ void led_task(void* arg)
 //touch_pad_scan_task 任务，检测触摸按键，并控制led任务运行状态
 void touch_pad_scan_task(void* arg)
 {
-    // 初始化一个IO为touch pad，触摸传感器信号名为T5，对应管脚GPIO12
+    // 初始化一个IO为touch pad，触摸传感器信号名为T7，对应管脚GPIO27
     // 此函数可多参数重载，以支持多触摸信号输入
-    touch_pad_button_init(1, TOUCH_PAD_NUM5);
+    touch_pad_button_init(1, TOUCH_PAD_NUM7);
     while(1)
     {
         uint16_t value = 0;
@@ -41,7 +41,7 @@ void touch_pad_scan_task(void* arg)
         }
         printf("\n\n");
 
-        if(touch_state[TOUCH_PAD_NUM5]) { //1，有人体触摸
+        if(touch_state[TOUCH_PAD_NUM7]) { //1，有人体触摸
             if(eTaskGetState(led_task_Handler) != eSuspended) {
                 vTaskSuspend(led_task_Handler);//暂停任务
             }

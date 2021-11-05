@@ -229,7 +229,7 @@ typedef struct {
     {                                 \
         .dev_hdl = dev,               \
         .flags = 0,                   \
-        .margin_us = 200,             \
+        .margin_us = 260,             \
     }
 
 /**
