@@ -81,7 +81,7 @@
 | 45_WIFI_http_request_weather_cjson  | 借助 `心知天气` 的 HTTP-API，获取未来3日天气。cJson使用  |
 | 46_WIFI_http..._cjson_free_15days  | 借助 `sojson网` 的 HTTP-API，获取未来15日天气。cJson使用  |
 | 47_WIFI_MQTT  | MQTT连接公网broker，下发指令控制LED。提供公网服务器后台和测试账号  |
-| 48_mbedtls_sha1_md5_AES_HmacSha1_base64  | mbedtls测试，测试 sha、HmacSha、MD5、AES 加密算法库  |
+| 48_mbedtls_sha1_md5_AES_HmacSha1  | mbedtls测试，测试 sha、HmacSha、MD5、AES 加密算法库，base64编码测试  |
 | 49_WIFI_MQTT_Aliyun_IOT_Platform  | MQTT连接`阿里云`物联网平台，上报温湿度、电压、光强，云端控制板载LED状态   |
 | OTA、ETH、BLE、GUI 待续...  |         |
 | 觉得好用就star下吧  |       |
