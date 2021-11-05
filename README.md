@@ -81,14 +81,14 @@
 | 45_WIFI_http_request_weather_cjson  | 借助 `心知天气` 的 HTTP-API，获取未来3日天气。cJson使用  |
 | 46_WIFI_http..._cjson_free_15days  | 借助 `sojson网` 的 HTTP-API，获取未来15日天气。cJson使用  |
 | 47_WIFI_MQTT  | MQTT连接公网broker，下发指令控制LED。提供公网服务器后台和测试账号  |
-| 48_mbedtls_sha1_md5_AES_HmacSha1_base64  | mbedtls测试，测试 sha、HmacSha、MD5、AES 加密算法库  |
+| 48_mbedtls_sha1_md5_AES_HmacSha1  | mbedtls测试，测试 sha、HmacSha、MD5、AES 加密算法库，base64编码测试  |
 | 49_WIFI_MQTT_Aliyun_IOT_Platform  | MQTT连接`阿里云`物联网平台，上报温湿度、电压、光强，云端控制板载LED状态   |
 | OTA、ETH、BLE、GUI 待续...  |         |
 | 觉得好用就star下吧  |       |
 | 详细说明见工程内的README文档  |       |
 | 图文教程会在CSDN博客中更新  |  [CSDN博客ESP32教程](https://blog.csdn.net/Mark_md/article/details/120157812?spm=1001.2014.3001.5501)  |
 | 开发板小批量生产中，12月TB上架  |    |
-| 提供的公网MQTT网页后台账号，大家不要瞎搞，共建文明开源环境  |    |
+| 提供公网MQTT后台管理账号  |  此账号大家不要瞎搞，共建文明开源环境  |
 
 
 <br/>
@@ -117,6 +117,8 @@ ESP32开发环境的搭建：[在windows上基于ESP-IDF、VsCode搭建ESP32开�
 # 配套开发板情况
 
 &emsp;&emsp;开发板在改最后一些细节，预计11月末小批量生厂，12月可以跟大家见面，以上的Demo除了MCPWM（引出的IO少），都可以完美运行。板载电池，主电源部分为UPS，保证脱机稳定性，也便于小规模集群测试。本来还担心当地贴片厂没有AOI还贵，JLC现在都有了，嘉立创赛高 ！！
+
+&emsp;&emsp;`原理图`已先行上传，**`Schematic_ESP32-IOT-KIT_2021-10-30.pdf`**。
 
 &emsp;&emsp;看都看到这儿了，还不多多star、点赞收藏。๑乛◡乛๑ 嘿嘿
 
