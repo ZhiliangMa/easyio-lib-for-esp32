@@ -20,9 +20,11 @@
 * LCD 可以以 `SPI-DMA 双缓冲环形队列`的方式刷屏。（320x240分辨率，RGB565，SPI以`80MHz`速率通信，最大刷屏帧率`53FPS`；40MHz也能有`30.2FPS`。目前DMA加速仅完美支持`ILI9341`、`ST7789V`两种驱动IC型号的屏幕）
 * LCD显示波动动效。
 * mbedtls 加密算法库。
-* WIFI的 TCP、UDP、HTTP、MQTT 的Demo。
-* cJson。
+* WIFI的 TCP、UDP、HTTP、MQTT、SNTP、SCAN 的Demo。
+* cJson合成、解析。
 * MQTT阿里云物联网设备连接认证。
+* `WIFI配网`：SmartConfig、EspTouch、AirKiss、Blufi 齐了，以后抽空将WEB配网补上。
+* 蓝牙、LVGL待续......OTA可能要鸽了，能跑会用，但要整合到库中很费事。
 
 
 ***
@@ -83,7 +85,11 @@
 | 47_WIFI_MQTT  | MQTT连接公网broker，下发指令控制LED。提供公网服务器后台和测试账号  |
 | 48_mbedtls_sha1_md5_AES_HmacSha1  | mbedtls测试，测试 sha、HmacSha、MD5、AES 加密算法库，base64编码测试  |
 | 49_WIFI_MQTT_Aliyun_IOT_Platform  | MQTT连接`阿里云`物联网平台，上报温湿度、电压、光强，云端控制板载LED状态   |
-| OTA、ETH、BLE、GUI 待续...  |         |
+| 50_WIFI_SNTP_DeepSleep  | SNTP对时(NTP简化版) + 深度睡眠 + RTC RAM  |
+| 51_WIFI_Scan  | WIFI 扫描可用的 AP 集（WIFI热点）  |
+| 52_WIFI_SmartConfig_EspTouch_AirKiss  | SmartConfig 给 WIFI配网，使用手机 EspTOUch APP 或者 微信Airkiss小程序。并保存可用SSID和密码，重启自动连接  |
+| 53_Blufi  | Blufi蓝牙配网，配网更安全迅速。并保存可用SSID和密码，重启自动连接  |
+| ETH、BLE、GUI 待续...  |         |
 | 觉得好用就star下吧  |       |
 | 详细说明见工程内的README文档  |       |
 | 图文教程会在CSDN博客中更新  |  [CSDN博客ESP32教程](https://blog.csdn.net/Mark_md/article/details/120157812?spm=1001.2014.3001.5501)  |
@@ -114,15 +120,21 @@ ESP32开发环境的搭建：[在windows上基于ESP-IDF、VsCode搭建ESP32开�
 
 ***
 
-# 配套开发板情况
+# 配套开发板情况、原理图
 
 &emsp;&emsp;开发板在改最后一些细节，预计11月末小批量生厂，12月可以跟大家见面，以上的Demo除了MCPWM（引出的IO少），都可以完美运行。板载电池，主电源部分为UPS，保证脱机稳定性，也便于小规模集群测试。本来还担心当地贴片厂没有AOI还贵，JLC现在都有了，嘉立创赛高 ！！
 
-&emsp;&emsp;`原理图`已先行上传，**`Schematic_ESP32-IOT-KIT_2021-10-30.pdf`**。
+&emsp;&emsp;`原理图`已先行上传，**`Schematic_ESP32-IOT-KIT_2021-11-16.pdf`**。
+
+&emsp;&emsp;[开发板原理图sch](Schematic_ESP32-IOT-KIT_2021-11-16.pdf)
 
 &emsp;&emsp;看都看到这儿了，还不多多star、点赞收藏。๑乛◡乛๑ 嘿嘿
 
 &emsp;&emsp;交流群会过几周建立，有兴趣的可以先到我CSDN博客里私信。
+
+![image_1](image/ESP32-IOT-KIT-LVGL_1.png)
+
+![image_1](image/iotKit_all.png)
 
 ***
 
