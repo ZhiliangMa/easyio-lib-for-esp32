@@ -2,9 +2,9 @@
 
 ***
 
-`Easyio` 是一款适配于`ESP-IDF`框架的`开源驱动库`，以支持`ESP32`的简便开发。其目的是在保持官方SDK灵活性的同时，大幅度简化乐鑫`ESP-IDF`开发框架的使用难度。（方便的话，有开源的Arduino和Platform可以用，但在工作上有时会硬性要求使用`ESP-IDF`，毕竟要对接FAE，于是就萌生了搞个 `Easyio` 的想法）
+&emsp;&emsp;`Easyio` 是一款适配于`ESP-IDF`框架的`开源驱动库`，以支持`ESP32`的简便开发。其目的是在保持官方SDK灵活性的同时，大幅度简化乐鑫`ESP-IDF`开发框架的使用难度。（方便的话，有开源的Arduino和Platform可以用，但在工作上有时会硬性要求使用`ESP-IDF`，毕竟要对接FAE，于是就萌生了搞个 `Easyio` 的想法）
 
-功能上，`Easyio` 已初具雏形，目前涵盖如下的驱动：
+&emsp;&emsp;功能上，`Easyio` 已初具雏形，目前涵盖如下的驱动：
 * LED、GPIO（+中断）
 * 按键（队列方式，数目几无上限）、触摸按键
 * ADC（8通道）、DAC（2通道）
@@ -24,7 +24,10 @@
 * cJson合成、解析。
 * MQTT阿里云物联网设备连接认证。
 * `WIFI配网`：SmartConfig、EspTouch、AirKiss、Blufi 齐了，以后抽空将WEB配网补上。
-* 蓝牙、LVGL待续......OTA可能要鸽了，能跑会用，但要整合到库中很费事。
+* LAN8720有线以太网。同时支持`IP101`、`DP83848`、`RTL8201`和`DM9051`。
+* LVGL暂时只Fork了官方的Demo，修改了sdkconfig，使其适配开发板的 `ST7789V` + `FT6236U`单点电容屏。后续会完善大量Demo来演示其控件和功能使用。
+* 蓝牙、GUI待续......
+* OTA可能要鸽了，能跑会用，但要整合到库中很费事。
 
 
 ***
@@ -89,9 +92,11 @@
 | 51_WIFI_Scan  | WIFI 扫描可用的 AP 集（WIFI热点）  |
 | 52_WIFI_SmartConfig_EspTouch_AirKiss  | SmartConfig 给 WIFI配网，使用手机 EspTOUch APP 或者 微信Airkiss小程序。并保存可用SSID和密码，重启自动连接  |
 | 53_Blufi  | Blufi蓝牙配网，配网更安全迅速。并保存可用SSID和密码，重启自动连接  |
+| 54_ETH_DHCP  | LAN8720有线以太网，DHCP从路由器或交换机获得IP  |
+| LVGL工程  | [lvgl仓库链接](https://github.com/ZhiliangMa/lv_port_esp32)。适配开发板的 `ST7789V` + `FT6236U`单点电容屏  |
 | ETH、BLE、GUI 待续...  |         |
 | 觉得好用就star下吧  |       |
-| 详细说明见工程内的README文档  |       |
+| 详细说明见各Demo内的README文档  |       |
 | 图文教程会在CSDN博客中更新  |  [CSDN博客ESP32教程](https://blog.csdn.net/Mark_md/article/details/120157812?spm=1001.2014.3001.5501)  |
 | 开发板小批量生产中，12月TB上架  |    |
 | 提供公网MQTT后台管理账号  |  此账号大家不要瞎搞，共建文明开源环境  |
@@ -138,6 +143,14 @@ ESP32开发环境的搭建：[在windows上基于ESP-IDF、VsCode搭建ESP32开�
 
 ***
 
+# 个人博客
+
+[CSDN blog - ESP32专栏](https://blog.csdn.net/mark_md/category_10794878.html)
+
+&emsp;&emsp;后续会同步更新`ESP-IDF`的使用方法和技巧，以及 `easyio` 配套 `ESP32-IOT-KIT开发板`的使用教程，求赞求粉求关注。
+
+***
+
 # 清理工程，减小体积
 
 &emsp;&emsp;`cleanBuild.bat` 为编译文件的`清理脚本`，鼠标双击运行，可删除同文件夹下所有工程的编译文件。一般一个工程的大小在几百KB，但编译后会生成100多MB的 `build` 文件，清理后可大大减少存储占用空间。每次push源码前先运行下此脚本，清理所有工程，方便同步到 `Github` 仓库。
@@ -147,6 +160,37 @@ ESP32开发环境的搭建：[在windows上基于ESP-IDF、VsCode搭建ESP32开�
 # 注意
 
 * `Easyio`建议搭配`ESP-IDF`的`V4.2`版本使用，V4.3版本与我的`Easyio`驱动库有兼容性问题。发现很多奇怪现象，不单单是编译不通过的问题，有些能编译但在硬件上运行报错，就很离谱。而这些问题在`V4.2`上则不存在。鉴于`V4.2`已经对ESP32提供了足够的支持，`V4.3`着重添加了`ESP32-S2/C3`的功能，而自己的`easyio`库暂时没有兼并`ESP32-S2/C3`的精力，于是推荐使用`V4.2`版本。
+
+***
+
+# 版权声明
+
+&emsp;&emsp;本源码遵守MIT开源协议。如使用此仓库工程及源码，请注明作者及来源。
+
+```
+MIT License
+
+Copyright (c) 2021 ZhiliangMa
+Copyright (c) https://github.com/ZhiliangMa/easyio-lib-for-esp32
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 ***
 
