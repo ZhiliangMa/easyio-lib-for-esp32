@@ -129,9 +129,9 @@ ESP32开发环境的搭建：[在windows上基于ESP-IDF、VsCode搭建ESP32开�
 
 &emsp;&emsp;在线文档正在补全中，一些常用的API和Demo的简介、操作步骤都会放在这里，作为一种补充本地文档的手段，也方便在线阅读。Github、Gitee同步，Gitee国内网速会快一些。
 
-&emsp;&emsp;[Easyio.doc-Github](https://zhiliangma.github.io/easyio.doc/#/)
+&emsp;&emsp;[Easyio.doc-Github](https://zhiliangma.github.io/easyio.doc)
 
-&emsp;&emsp;[Easyio.doc-Gitee](https://ZhiliangMa.gitee.io/easyio.doc)
+&emsp;&emsp;[Easyio.doc-Gitee](http://zhiliangma.gitee.io/easyio.doc)
 
 ***
 
