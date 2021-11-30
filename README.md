@@ -26,6 +26,7 @@
 * `WIFI配网`：SmartConfig、EspTouch、AirKiss、Blufi 齐了，以后抽空将WEB配网补上。
 * LAN8720有线以太网。同时支持`IP101`、`DP83848`、`RTL8201`和`DM9051`。
 * LVGL暂时只Fork了官方的Demo，修改了sdkconfig，使其适配开发板的 `ST7789V` + `FT6236U`单点电容屏。后续会完善大量Demo来演示其控件和功能使用。
+* LVGL_v8可用，流畅度较v7大大提高，可以更好的适配v8的模拟器。
 * 蓝牙、GUI待续......
 * OTA可能要鸽了，能跑会用，但要整合到库中很费事。
 
@@ -93,7 +94,8 @@
 | 52_WIFI_SmartConfig_EspTouch_AirKiss  | SmartConfig 给 WIFI配网，使用手机 EspTOUch APP 或者 微信Airkiss小程序。并保存可用SSID和密码，重启自动连接  |
 | 53_Blufi  | Blufi蓝牙配网，配网更安全迅速。并保存可用SSID和密码，重启自动连接  |
 | 54_ETH_DHCP  | LAN8720有线以太网，DHCP从路由器或交换机获得IP  |
-| LVGL工程  | [lvgl仓库链接](https://github.com/ZhiliangMa/lv_port_esp32)。适配开发板的 `ST7789V` + `FT6236U`单点电容屏  |
+| LVGL_v7工程  | [lvgl7仓库链接](https://github.com/ZhiliangMa/lv_port_esp32)。适配开发板的 `ST7789V` + `FT6236U`单点电容屏  |
+| LVGL_v8  | [lvgl8仓库链接](https://github.com/ZhiliangMa/lvgl_v8_esp32)。较v7相比，流畅度大大提高，可以更好的适配v8的模拟器  |
 | ETH、BLE、GUI 待续...  |         |
 | 觉得好用就star下吧  |       |
 | 详细说明见各Demo内的README文档  |       |
@@ -150,6 +152,9 @@ ESP32开发环境的搭建：[在windows上基于ESP-IDF、VsCode搭建ESP32开�
 ![image_1](image/ESP32-IOT-KIT-LVGL_1.png)
 
 ![image_1](image/iotKit_all.png)
+
+![lvgl_v8_test4](https://github.com/ZhiliangMa/lvgl_v8_esp32/raw/main/image/lvgl_v8_test4.gif)
+
 
 ***
 
