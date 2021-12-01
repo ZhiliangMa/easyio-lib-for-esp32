@@ -44,7 +44,8 @@ set(easyio_srcs
     "src/sntp_systime.c"
     "src/wifi_scan_print.c"
     "src/wifi_smartconfig.c"
-    "src/eth_connect.c")
+    "src/eth_connect.c"
+    )
 
 idf_component_register(SRCS "${easyio_srcs}"
                        INCLUDE_DIRS "include"

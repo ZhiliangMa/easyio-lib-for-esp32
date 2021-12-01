@@ -19,7 +19,7 @@ void led_task(void* arg)
     }
 }
 
-// i2c_mpu6050_task 任务。读取 MPU6050的 XYZ轴加速度计、XYZ轴陀螺仪 数据。兼容 MPU6050/9250、ICM-20602/8
+// i2c_mpu6050_task 任务。读取 MPU6050的 XYZ轴加速度计、XYZ轴陀螺仪 数据。IMU兼容 MPU6050/9250、ICM-20602/6/8
 void i2c_mpu6050_task(void* arg)
 {
     int16_t accel[3],gyro[3];
