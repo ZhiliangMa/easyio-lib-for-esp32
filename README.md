@@ -141,7 +141,7 @@ ESP32开发环境的搭建：[在windows上基于ESP-IDF、VsCode搭建ESP32开�
 
 &emsp;&emsp;开发板在改最后一些细节，预计11月末小批量生厂，12月可以跟大家见面，以上的Demo除了MCPWM（引出的IO少），都可以完美运行。板载电池，主电源部分为UPS，保证脱机稳定性，也便于小规模集群测试。本来还担心当地贴片厂没有AOI还贵，JLC现在都有了，嘉立创赛高 ！！
 
-&emsp;&emsp;`原理图`已先行上传，**`Schematic_ESP32-IOT-KIT_2021-11-16.pdf`**。
+&emsp;&emsp;`原理图`已先行上传，**`Schematic_ESP32-IOT-KIT_2021-12-26.pdf`**。
 
 &emsp;&emsp;[开发板原理图sch](Schematic_ESP32-IOT-KIT_2021-11-16.pdf)
 
