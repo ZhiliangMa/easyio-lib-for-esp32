@@ -143,7 +143,7 @@ ESP32开发环境的搭建：[在windows上基于ESP-IDF、VsCode搭建ESP32开�
 
 &emsp;&emsp;`原理图`已先行上传，**`Schematic_ESP32-IOT-KIT_2021-12-26.pdf`**。
 
-&emsp;&emsp;[开发板原理图sch](Schematic_ESP32-IOT-KIT_2021-11-16.pdf)
+&emsp;&emsp;[开发板原理图sch](Schematic_ESP32-IOT-KIT_2021-12-26.pdf)
 
 &emsp;&emsp;看都看到这儿了，还不多多star、点赞收藏。๑乛◡乛๑ 嘿嘿
 
