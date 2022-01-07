@@ -22,5 +22,7 @@
         "dac.h": "c",
         "mcpwm_motor.h": "c",
         "easyio_mcpwm_config.h": "c"
-    }
+    },
+    "idf.adapterTargetName": "esp32",
+    "idf.portWin": "COM20"
 }
