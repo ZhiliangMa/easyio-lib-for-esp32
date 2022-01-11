@@ -137,13 +137,17 @@ ESP32开发环境的搭建：[在windows上基于ESP-IDF、VsCode搭建ESP32开�
 
 ***
 
-# 配套开发板情况、原理图
+# 配套开发板情况、原理图（硬件全开源）
+
+&emsp;&emsp;硬件全开源，PCB工程使用立创EDA绘制，详见下面链接。；不要白嫖哦，点颗星星再走嘛。
 
 &emsp;&emsp;开发板在改最后一些细节，预计11月末小批量生厂，12月可以跟大家见面，以上的Demo除了MCPWM（引出的IO少），都可以完美运行。板载电池，主电源部分为UPS，保证脱机稳定性，也便于小规模集群测试。本来还担心当地贴片厂没有AOI还贵，JLC现在都有了，嘉立创赛高 ！！
 
 &emsp;&emsp;`原理图`已先行上传，**`Schematic_ESP32-IOT-KIT_2022-01-07.pdf`**。
 
 &emsp;&emsp;[开发板原理图sch](Schematic_ESP32-IOT-KIT_2022-01-07.pdf)
+
+&emsp;&emsp;PCB工程：[立创EDA - ESP32-IOT-KIT物联网开发板](NULL)
 
 &emsp;&emsp;看都看到这儿了，还不多多star、点赞收藏。๑乛◡乛๑ 嘿嘿
 
