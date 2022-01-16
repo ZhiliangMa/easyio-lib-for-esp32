@@ -26,5 +26,7 @@
         "ir_tools.h": "c",
         "mcpwm_capture.h": "c",
         "touch_pad_button.h": "c"
-    }
+    },
+    "idf.adapterTargetName": "esp32",
+    "idf.portWin": "COM32"
 }

@@ -27,5 +27,6 @@
         "touch_pad_button.h": "c",
         "mcpwm_capture.h": "c"
     },
-    "idf.adapterTargetName": "esp32"
+    "idf.adapterTargetName": "esp32",
+    "idf.portWin": "COM32"
 }

@@ -117,6 +117,14 @@ ESP32开发环境的搭建：[在windows上基于ESP-IDF、VsCode搭建ESP32开�
 
 ***
 
+# LVGL - GUI工程支持
+
+&emsp;&emsp;[lvgl7仓库链接](https://github.com/ZhiliangMa/lv_port_esp32)。适配开发板的 2.0寸 `ST7789V` + `FT6236U`单点电容屏。
+
+&emsp;&emsp;[lvgl8仓库链接](https://github.com/ZhiliangMa/lvgl_v8_esp32)。较v7相比，流畅度大大提高，可以更好的适配v8的模拟器。
+
+***
+
 # 如何使用easyio
 
 &emsp;&emsp;库的导入方式异常简便，直接将`easyio_lib`文件夹，拖入自己工程的 `components` 文件夹下。并在`main.c`包含头文件`#include "easyio.h"`，即可使用Easyio的全部功能。
@@ -137,25 +145,61 @@ ESP32开发环境的搭建：[在windows上基于ESP-IDF、VsCode搭建ESP32开�
 
 ***
 
-# 配套开发板情况、原理图（硬件全开源）
+# 配套开发板、原理图、PCB（硬件全开源）
 
-&emsp;&emsp;硬件全开源，PCB工程使用立创EDA绘制，详见下面链接。；不要白嫖哦，点颗星星再走嘛。
+&emsp;&emsp;硬件全开源，PCB工程使用立创EDA绘制，详见下面链接。
 
-&emsp;&emsp;开发板在改最后一些细节，预计11月末小批量生厂，12月可以跟大家见面，以上的Demo除了MCPWM（引出的IO少），都可以完美运行。板载电池，主电源部分为UPS，保证脱机稳定性，也便于小规模集群测试。本来还担心当地贴片厂没有AOI还贵，JLC现在都有了，嘉立创赛高 ！！
+&emsp;&emsp;硬件PCB和源码都开源了，就不要再白嫖啦，(ಥ﹏ಥ)，起码点颗星星再走嘛。(▰╹◡╹▰)
 
-&emsp;&emsp;`原理图`已先行上传，**`Schematic_ESP32-IOT-KIT_2022-01-07.pdf`**。
+&emsp;&emsp;经过几次打样，硬件功能已保证完美无BUG，Easyio库也针对硬件进行了适配，除电机MCPWM例程需要自行更改外，其他Demo编译后下载到开发板即可观察到应有的现象。
 
-&emsp;&emsp;[开发板原理图sch](Schematic_ESP32-IOT-KIT_2022-01-07.pdf)
+&emsp;&emsp;还等什么，一起去嘉立创白嫖吧。
 
-&emsp;&emsp;PCB工程：[立创EDA - ESP32-IOT-KIT物联网开发板](NULL)
+&emsp;&emsp;不熟悉硬件，不会焊接的也没关系，已在JLC进行了小批量，上架TB：
+
+&emsp;&emsp;`【成品购买】`：
+
+&emsp;&emsp;[ESP32-IOT-KIT开发板购买链接，标配128，满配199](https://m.tb.cn/h.fQtVEBu?sm=568647)
+
+&emsp;&emsp;[配套的2.0寸单点电容触摸屏的购买链接](https://m.tb.cn/h.fQteyrB?sm=46f608)
+
+&emsp;&emsp;`【原理图】`：**Schematic_ESP32-IOT-KIT_2022-01-16.pdf**。
+
+&emsp;&emsp;[开发板原理图sch](Schematic_ESP32-IOT-KIT_2022-01-16.pdf)
+
+&emsp;&emsp;`【图形化BOM】`：
+
+&emsp;&emsp;[BOM_PCB_ESP32-DEV_rev0.html](BOM_PCB_ESP32-DEV_rev0.html)
+
+&emsp;&emsp;这个BOM的界面真的超好看，交互视图，妈妈再也不用担心手焊元件找不到位置。
+
+&emsp;&emsp;`【PCB工程】`：
+
+&emsp;&emsp;[立创EDA - ESP32-IOT-KIT物联网开发板](https://oshwhub.com/mazhiliang/esp32-dev)
+
+&emsp;&emsp;`【详细开源说明】`：
+
+&emsp;&emsp;[CSDN博客 - ESP32-IOT-KIT全开源物联网开发板](https://blog.csdn.net/Mark_md/article/details/122487751?spm=1001.2014.3001.5501)
+
+&emsp;&emsp;PCB工程可直接在`立创EDA`免费打样下单，超出2次/每月的免费限额也没关系，立创EDA制图的PCB打样，会随机立减，大多数是15元/次还顺丰包邮（超出2次后）。
 
 &emsp;&emsp;看都看到这儿了，还不多多star、点赞收藏。๑乛◡乛๑ 嘿嘿
 
-&emsp;&emsp;交流群会过几周建立，有兴趣的可以先到我CSDN博客里私信。
+&emsp;&emsp;`【交流Q群】`：827686418
 
-![image_1](image/ESP32-IOT-KIT-LVGL_1.png)
+![image_1](Q群827686418.png)
 
-![image_1](image/iotKit_all.png)
+![image_2](image/esp32_black_3PointLight4K.122.jpg)
+
+![image_2](image/esp32-iot-kit-modify.42.png)
+
+![image_2](image/esp32-ibom.jpg)
+
+![image_3](image/esp32-lceda.jpg)
+
+![image_4](image/ESP32-IOT-KIT-LVGL_1.png)
+
+![image_5](image/iotKit_all.png)
 
 ![lvgl_v8_test4](https://github.com/ZhiliangMa/lvgl_v8_esp32/raw/main/image/lvgl_v8_test4.gif)
 

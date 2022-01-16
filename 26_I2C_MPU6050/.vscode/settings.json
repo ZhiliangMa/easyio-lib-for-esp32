@@ -24,5 +24,7 @@
         "easyio_mcpwm_config.h": "c",
         "mcpwm_half_bridge.h": "c",
         "ir_tools.h": "c"
-    }
+    },
+    "idf.adapterTargetName": "esp32",
+    "idf.portWin": "COM32"
 }
